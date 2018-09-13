@@ -1,0 +1,120 @@
+grammar MP;
+
+@lexer::header {
+from lexererr import *
+}
+
+options{
+	language=Python3;
+}
+ //ASS1
+
+program:
+
+// prime example //
+
+fragment A : [aA]; // match either an 'a' or 'A'
+fragment B : [bB];
+fragment C : [cC];
+fragment D : [dD];
+fragment E : [eE];
+fragment F : [fF];
+fragment G : [gG];
+fragment H : [hH];
+fragment I : [iI];
+fragment J : [jJ];
+fragment K : [kK];
+fragment L : [lL];
+fragment M : [mM];
+fragment N : [nN];
+fragment O : [oO];
+fragment P : [pP];
+fragment Q : [qQ];
+fragment R : [rR];
+fragment S : [sS];
+fragment T : [tT];
+fragment U : [uU];
+fragment V : [vV];
+fragment W : [wW];
+fragment X : [xX];
+fragment Y : [yY];
+fragment Z : [zZ];
+/// 
+
+SEMI: ',';
+
+COLON: ':';
+
+fragment DEC_NUM: [0-9]+;
+
+fragment LETTER: [a-zA-Z]+;
+
+fragment UNDERSCORE: '_';
+
+IDENTIFIER: ((LETTER | UNDERSCORE) (INTLIT | LETTER | UNDERSCORE)*)+;
+
+Var: VarDeclare Var | Empty;
+
+VarDeclare: IDENTIFIER COLON VarType Semi;
+
+Value: 'INT' | 'DOUBLE' | 'BOOL' | 'STRING';
+
+ARRAY: '[' Value (',' Value)* ']'; 
+
+VarType: Value | ARRAY;
+
+
+
+// Keywords
+K_ALL: A L L | 'ALL';
+K_AND: A N D  | 'AND';
+K_ANY: A N Y  | 'ANY';
+K_ARRAY: A R R A Y | 'ARRAY';
+K_BEGIN: B E G I N  | 'BEGIN';
+K_BREAK: B R E A K | 'BREAK';
+K_CONTINUE; C O N T I N U E | 'CONTINUE';
+K_DO: D O | 'DO';
+K_DIV: D I V | 'DIV';
+K_DOWNTO: D O W N T O | 'DOWNTO';
+K_ELSE: E L S E | 'ELSE';
+K_END: E N D | 'END';
+K_FALSE: F A L S E  | 'FALSE';
+K_FOR: F O R | 'FOR';
+K_FROM: F R O M  | 'FROM';
+K_FUNCTION: F U N C T I O N  | 'FUNCTION';
+K_FUNCTIONS: F U N C T I O N S  | 'FUNCTIONS';
+K_IF: I F  | 'IF';
+K_IN: I N  | 'IN';
+K_INDEX: I N D E X  | 'INDEX';
+K_NOT: N O T  | 'NOT';
+K_NULL: N U L L  | 'NULL';
+K_OF: O F | 'OF';
+K_OR: O R  | 'OR';
+K_RETURN: R E T U R N | 'RETURN';
+K_TO: T O | 'TO';
+K_TOKEN: T O K E N  | 'TOKEN';
+
+
+K_ASCII: A S C I I | 'ASCII';
+K_BOOLEAN: B O O L E A N | 'BOOLEAN';
+K_DOUBLE: D O U B L E | 'DOUBLE';
+K_FLOAT: F L O A T | 'FLOAT';
+K_INT: I N T | 'INT';
+
+
+INTEGER: DEC_DIGIT+;
+
+STRING: '\'' ('\\' . | '\'\'' | ~('\'' | '\\'))* '\'';
+
+fragment HEX_DIGIT: [0-9A-F];
+fragment DEC_DIGIT: [0-9];
+fragment EXPONENT_NUM_PART: 'E' '-'? DEC_DIGIT+;
+
+
+
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
+
+ERROR_CHAR: .;
+UNCLOSE_STRING: .;
+ILLEGAL_ESCAPE: .;
